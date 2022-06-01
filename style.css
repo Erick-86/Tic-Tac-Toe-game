@@ -24,3 +24,70 @@ header p{
     font-size: 1rem;
     margin: .6rem 0rem;
 }
+
+/* Start Game Section */
+.players-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.players-container{
+    display: flex;
+    justify-content: center;
+    margin: 2.5rem 0rem 1.3rem 0rem;
+}
+
+.players-section .players{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #edf4fc;
+    padding: 1rem 4.3rem;
+    margin: 0rem .8rem;
+    border-radius: .2rem;
+    box-shadow: 0px 2px 6px 0px rgba(112,112,112,0.4);
+    -webkit-box-shadow: 0px 2px 6px 0px rgba(112,112,112,0.4);
+    -moz-box-shadow: 0px 2px 6px 0px rgba(112,112,112,0.4);
+}
+
+.players-section .players p{
+    color: #3f3f3f;
+    font-size: .97rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.players-section .players h3{
+    margin: .8rem 0rem;
+    color: #0054a3;
+    font-size: 1.3rem;
+}
+
+.players-section .players span{
+    margin: 0;
+    padding-bottom: .8rem;
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.players-section .players button{
+    border: none;
+    background-color: inherit;
+    color: #0054a3;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+main .start-btn{
+    border: none;
+    border-radius: .2rem;
+    background-color: #0069cc;
+    padding: .35rem .7rem;
+    color: #ffffff;
+    cursor: pointer;
+    transition: .3s;
+}
+
+main .start-btn:hover{
+    background-color: #2483db;
+}
