@@ -3,3 +3,22 @@ body{
     margin: 0;
     box-sizing: border-box;
 }
+
+header{
+    background-color: #0069cc;
+    padding: 30px;
+    text-align: center;
+}
+
+header h1{
+    margin: 0;
+    text-transform: capitalize;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+header p{
+    color: #e6e6e6;
+    font-size: 1.05rem;
+}
