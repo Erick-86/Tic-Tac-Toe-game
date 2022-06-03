@@ -232,5 +232,9 @@ main .start-btn:hover{
 }
 
 .game_box ol li:hover{
-    background-color: #0069cc;
+    background-color: #0054a3;
+}
+
+.game_box ol li.played{
+    background-color: #0054a3;
 }
