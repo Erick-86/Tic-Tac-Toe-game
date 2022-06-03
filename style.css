@@ -28,7 +28,7 @@ header p{
 
 /* modal (game config)*/
 .modal-overlay{
-    background-color: rgba(0, 0, 0, 0.37);
+    background-color: rgba(0, 0, 0, 0.596);
     position: fixed;
     height: 100%;
     width: 100%;
