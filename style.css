@@ -6,6 +6,11 @@ body{
     background-color: #eef6ff;
 }
 
+p{
+    margin: 0;
+    padding: 0;
+}
+
 header{
     background-color: #0069cc;
     padding: 30px;
@@ -28,7 +33,7 @@ header p{
 
 /* modal (game config)*/
 .modal-overlay{
-    background-color: rgba(0, 0, 0, 0.37);
+    background-color: rgba(0, 0, 0, 0.596);
     position: fixed;
     height: 100%;
     width: 100%;
@@ -50,6 +55,7 @@ header p{
 .game-config-modal h2{
     font-size: 1.1rem;
     margin: 0 0 .5rem 0;
+    text-align: center;
 }
 
 .game-config-modal form {
@@ -57,6 +63,12 @@ header p{
     flex-direction: column;
     align-items: center;
     margin:0 0 .7rem 0;
+}
+
+.game-config-modal .form-control{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 form label{
@@ -68,11 +80,32 @@ form label{
 form input{
     border: 1px solid #919191;
     padding: .2rem .4rem;
-    margin-bottom: .7rem;
+    margin-bottom: .5rem;
 }
 
 form input:focus{
     outline: .1rem solid #6e6e6e;
+}
+
+.input-error label{
+    color: rgba(226, 45, 0, 0.829);
+}
+
+.input-error input{
+    background-color: rgba(226, 45, 0, 0.178);
+    border: 1.5px solid rgba(226, 45, 0, 0.829);
+}
+
+.input-error input:focus{
+    outline: none
+}
+
+#user-input_error{
+    color: rgba(226, 45, 0, 0.829);
+}
+
+.game-config-modal form .forms-btns{
+    margin-top: .5rem;
 }
 
 .game-config-modal button{
