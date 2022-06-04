@@ -17,11 +17,14 @@
     <aside class="game-config-modal" id="game-config-modal">
         <h2>Choose your name</h2>
         <form>
-            <label for="name">Player Name</label>
-            <input type="text" id="name" required>
-            <div>
+            <div class="form-control">
+                <label for="name">Player Name</label>
+                <input type="text" name="playername" id="name">
+            </div>
+            <p id="user-input_error"></p>
+            <div class="forms-btns">
                 <button type="submit" class="confirm" id="confirm-btn">confirm</button>
-                <button type="button" class="cancel" id="cancel-btn">cancel</button>
+                <button type="reset" class="cancel" id="cancel-btn">cancel</button>
             </div>
         </form>
     </aside>
