@@ -56,3 +56,16 @@ function savePlayerConfig(e) {
 }
 
 playerConfigForms.addEventListener('submit', savePlayerConfig)
+
+//removing the error alert if the player starts typing in forms
+//form input
+let configInput = document.getElementById("name")
+
+ function removeErrorAlert () {
+    if(configInput.value.length > 0) {
+        playerConfigForms.firstElementChild.classList.remove("input-error")
+        userInputError.textContent = ''
+    }
+ }
+
+ configInput.addEventListener('input', removeErrorAlert)
