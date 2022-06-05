@@ -3,10 +3,20 @@ const modalOverlay = document.getElementById("modal-overlay");
 //Game config modal
 const gameConfigModal = document.getElementById("game-config-modal");
 //Edit player names btns
-const editElayerNameBtn1 = document.getElementById("edit-player1-name-btn");
-const editElayerNameBtn2 = document.getElementById("edit-player2-name-btn");
+const editElayerNameBtn1 = document.getElementById("edit-player-1-name-btn");
+const editElayerNameBtn2 = document.getElementById("edit-player-2-name-btn");
 //Player config form
 const playerConfigForms = document.querySelector('form')
+//
+let editedPlayer = 0
+//an array storing the players data
+const players = [
+    {name: '',
+     symbol: 'X'},
+
+    {name: '',
+     symbol: 'O'}
+]
 //Modal cancel btn
 const closeGameConfigBtn = document.getElementById("cancel-btn")
 //User inout Error
@@ -17,9 +27,12 @@ const userInputError = document.getElementById("user-input_error")
 //Opening and closing fo the game config modal
 // 
 // //Opening the modal
-function openGameConfig() {
+function openGameConfig(e) {
+    //Which player btn is been clicked using the data set attribute
+    editedPlayer = +e.target.dataset.playerid //the + will convert the variable to a number. e.i + 1 => 1
     modalOverlay.style.display = "block"
     gameConfigModal.style.display = "block"
+    
 }
 
 editElayerNameBtn1.addEventListener("click", openGameConfig)
@@ -32,6 +45,8 @@ function closeGameConfig() {
     //this code will remove the error alert when the modal is closed (cancel)
     playerConfigForms.firstElementChild.classList.remove("input-error")
     userInputError.textContent = ''
+    //to clear the input when the modal closes
+    playerConfigForms.firstElementChild.lastElementChild.value = ''
 }
 modalOverlay.addEventListener('click', closeGameConfig)
 closeGameConfigBtn.addEventListener('click', closeGameConfig)
@@ -53,6 +68,18 @@ function savePlayerConfig(e) {
         // if a player does not enter a valid input because we arent passing any value to it 
         return
     }
+
+    // Storing and managing submitted data
+    //
+    //Differenciating between the 2 players when their btns is clicked
+    const updatePlayerData = document.getElementById("player-" + editedPlayer + "-data")
+    updatePlayerData.children[1].textContent = enteredPlayerName
+
+    //accessing the 2 elements in the arrays
+    players[editedPlayer - 1].name = enteredPlayerName
+
+    //calling the close modal function to close the modal on confirm click
+    closeGameConfig()
 }
 
 playerConfigForms.addEventListener('submit', savePlayerConfig)
