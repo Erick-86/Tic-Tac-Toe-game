@@ -192,7 +192,7 @@ form input:focus{
     cursor: pointer;
 }
 
-main .start-btn{
+main .start-game-btn{
     border: none;
     border-radius: .2rem;
     background-color: #0069cc;
@@ -206,15 +206,18 @@ main .start-btn:hover{
     background-color: #2483db;
 }
 
+#game_section{
+    display: none;
+}
+
 .game_section .win-box{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
     margin: 2rem auto 1rem auto;
     padding: 1rem 7rem;
     background-color: #0054a3;
     border-radius: .2rem;
     width: fit-content;
+    display: none;
 }
 
 .win-box h1{
@@ -230,7 +233,6 @@ main .start-btn:hover{
 }
 
 /* Game styling */
-
 .game_box {
     display: flex;
     flex-direction: column;

@@ -21,6 +21,10 @@ const players = [
 const closeGameConfigBtn = document.getElementById("cancel-btn")
 //User inout Error
 const userInputError = document.getElementById("user-input_error")
+//Start game btn
+const startGameBtn = document.getElementById("start-game-btn")
+//Game section
+const gameSection =document.getElementById("game_section")
 // const editNameBtn = document.getElementById("edit-name-btn")
 
 
@@ -96,3 +100,13 @@ let configInput = document.getElementById("name")
  }
 
  configInput.addEventListener('input', removeErrorAlert)
+
+ //Adding start game logic
+ function startGame() {
+    if (players[0].name === '' || players[1].name === ''){
+        alert('Set a custom player names for both players')
+        return
+    }
+        gameSection.style.display = "block"
+ }
+ startGameBtn.addEventListener('click', startGame)
