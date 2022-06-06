@@ -8,7 +8,15 @@ const editElayerNameBtn2 = document.getElementById("edit-player-2-name-btn");
 //Player config form
 const playerConfigForms = document.querySelector('form')
 //
+//Storing the game data when a box is selected using 2 dimensional array
+const gameData = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+]
+
 let editedPlayer = 0
+let activePlayer = 0
 //an array storing the players data
 const players = [
     {name: '',
@@ -21,6 +29,14 @@ const players = [
 const closeGameConfigBtn = document.getElementById("cancel-btn")
 //User inout Error
 const userInputError = document.getElementById("user-input_error")
+//Start game btn
+const startGameBtn = document.getElementById("start-game-btn")
+//Game section
+const gameSection = document.getElementById("game_section")
+//Player turn
+const playerTurn = document.getElementById("player_turn")
+//Game board list items
+const gameBoardBoxes = document.querySelectorAll(".game-board li") 
 // const editNameBtn = document.getElementById("edit-name-btn")
 
 
@@ -96,3 +112,59 @@ let configInput = document.getElementById("name")
  }
 
  configInput.addEventListener('input', removeErrorAlert)
+
+ //Adding start game logic
+ function startGame() {
+    if (players[0].name === '' || players[1].name === ''){
+        alert('Set a custom player names for both players')
+        return
+    }
+
+    //displaying player name when game starts
+    playerTurn.textContent = players[activePlayer].name
+
+    gameSection.style.display = "block"
+ }
+ startGameBtn.addEventListener('click', startGame)
+
+//Game turns and field selection
+//Looping through all the game board list items when they been clicked
+for (const gameBoardBox of gameBoardBoxes) {
+    gameBoardBox.addEventListener('click', selectedBox)
+}
+
+//Switchibg player
+function switchPlayer() {
+    if (activePlayer === 0) {
+        activePlayer = 1
+    }else {
+        activePlayer = 0
+    }
+
+    //displaying player name when its a player turn
+    playerTurn.textContent = players[activePlayer].name
+}
+
+//Adding player symbol when clicked
+function selectedBox(e) {
+
+    //selecting the colums and rows using dataset attribute
+    const selctedCol = e.target.dataset.col - 1
+    const selctedRow = e.target.dataset.row - 1
+
+    //Disabling a box if its already been selected
+    if (gameData[selctedRow][selctedCol] > 0) {
+        alert('Select an empty field')
+        return
+    }
+
+    //Placing player symbol in the box when clicked
+    e.target.textContent = players[activePlayer].symbol
+
+    //Adding played class to the box when is been clicked
+    e.target.classList.add("played")
+
+    //updating the game data using the 2 dimensional arrays
+    gameData[selctedRow][selctedCol] = activePlayer + 1
+    switchPlayer()
+}
