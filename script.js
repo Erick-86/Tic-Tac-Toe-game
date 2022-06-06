@@ -8,6 +8,13 @@ const editElayerNameBtn2 = document.getElementById("edit-player-2-name-btn");
 //Player config form
 const playerConfigForms = document.querySelector('form')
 //
+//Storing the game data when a box is selected using 2 dimensional array
+const gameData = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+]
+
 let editedPlayer = 0
 let activePlayer = 0
 //an array storing the players data
@@ -140,8 +147,24 @@ function switchPlayer() {
 
 //Adding player symbol when clicked
 function selectedBox(e) {
+
+    //selecting the colums and rows using dataset attribute
+    const selctedCol = e.target.dataset.col - 1
+    const selctedRow = e.target.dataset.row - 1
+
+    //Disabling a box if its already been selected
+    if (gameData[selctedRow][selctedCol] > 0) {
+        alert('Select an empty field')
+        return
+    }
+
+    //Placing player symbol in the box when clicked
     e.target.textContent = players[activePlayer].symbol
+
+    //Adding played class to the box when is been clicked
     e.target.classList.add("played")
 
+    //updating the game data using the 2 dimensional arrays
+    gameData[selctedRow][selctedCol] = activePlayer + 1
     switchPlayer()
 }
