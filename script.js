@@ -9,6 +9,7 @@ const editElayerNameBtn2 = document.getElementById("edit-player-2-name-btn");
 const playerConfigForms = document.querySelector('form')
 //
 let editedPlayer = 0
+let activePlayer = 0
 //an array storing the players data
 const players = [
     {name: '',
@@ -24,7 +25,11 @@ const userInputError = document.getElementById("user-input_error")
 //Start game btn
 const startGameBtn = document.getElementById("start-game-btn")
 //Game section
-const gameSection =document.getElementById("game_section")
+const gameSection = document.getElementById("game_section")
+//Player turn
+const playerTurn = document.getElementById("player_turn")
+//Game board list items
+const gameBoardBoxes = document.querySelectorAll(".game-board li") 
 // const editNameBtn = document.getElementById("edit-name-btn")
 
 
@@ -107,6 +112,36 @@ let configInput = document.getElementById("name")
         alert('Set a custom player names for both players')
         return
     }
-        gameSection.style.display = "block"
+
+    //displaying player name when game starts
+    playerTurn.textContent = players[activePlayer].name
+
+    gameSection.style.display = "block"
  }
  startGameBtn.addEventListener('click', startGame)
+
+//Game turns and field selection
+//Looping through all the game board list items when they been clicked
+for (const gameBoardBox of gameBoardBoxes) {
+    gameBoardBox.addEventListener('click', selectedBox)
+}
+
+//Switchibg player
+function switchPlayer() {
+    if (activePlayer === 0) {
+        activePlayer = 1
+    }else {
+        activePlayer = 0
+    }
+
+    //displaying player name when its a player turn
+    playerTurn.textContent = players[activePlayer].name
+}
+
+//Adding player symbol when clicked
+function selectedBox(e) {
+    e.target.textContent = players[activePlayer].symbol
+    e.target.classList.add("played")
+
+    switchPlayer()
+}

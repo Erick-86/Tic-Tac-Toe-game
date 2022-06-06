@@ -207,7 +207,7 @@ main .start-btn:hover{
 }
 
 #game_section{
-    display: none;
+    /* display: none; */
 }
 
 .game_section .win-box{
@@ -259,12 +259,18 @@ main .start-btn:hover{
 }
 
 .game_box ol li{
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #ffffff;
     width: 5rem;
     height: 5rem;
     border-radius: .2rem;
     background-color: #b9dcff;
     transition: .3s;
+    cursor: pointer;
 }
 
 .game_box ol li:hover{
@@ -273,4 +279,5 @@ main .start-btn:hover{
 
 .game_box ol li.played{
     background-color: #0054a3;
+    cursor: default;
 }
