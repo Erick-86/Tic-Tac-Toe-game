@@ -207,7 +207,7 @@ main .start-btn:hover{
 }
 
 #game_section{
-    /* display: none; */
+    display: none;
 }
 
 .game_section .win-box{

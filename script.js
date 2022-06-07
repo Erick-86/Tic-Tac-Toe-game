@@ -17,6 +17,8 @@ const gameData = [
 
 let editedPlayer = 0
 let activePlayer = 0
+let currentRound = 1
+let gameIsOver = false
 //an array storing the players data
 const players = [
     {name: '',
@@ -35,10 +37,12 @@ const startGameBtn = document.getElementById("start-game-btn")
 const gameSection = document.getElementById("game_section")
 //Player turn
 const playerTurn = document.getElementById("player_turn")
+//Game board
+const gameBoard = document.getElementById("game-board")
 //Game board list items
 const gameBoardBoxes = document.querySelectorAll(".game-board li") 
-// const editNameBtn = document.getElementById("edit-name-btn")
-
+//Winning Box
+const winBox = document.getElementById("win-box")
 
 //Opening and closing fo the game config modal
 // 
@@ -119,6 +123,9 @@ let configInput = document.getElementById("name")
         alert('Set a custom player names for both players')
         return
     }
+    
+    //calling the resetGame function when a game is started
+    resetGame()
 
     //displaying player name when game starts
     playerTurn.textContent = players[activePlayer].name
@@ -153,8 +160,8 @@ function selectedBox(e) {
     const selctedRow = e.target.dataset.row - 1
 
     //Disabling a box if its already been selected
-    if (gameData[selctedRow][selctedCol] > 0) {
-        alert('Select an empty field')
+    if (gameData[selctedRow][selctedCol] > 0 || gameIsOver) {
+        // alert('Select an empty field')
         return
     }
 
@@ -166,5 +173,96 @@ function selectedBox(e) {
 
     //updating the game data using the 2 dimensional arrays
     gameData[selctedRow][selctedCol] = activePlayer + 1
+
+    //checking for game winner
+    const winnerID = gameWinner()
+
+    if(winnerID !== 0){
+        endGame(winnerID)
+    }
+
+    currentRound++
     switchPlayer()
+}
+
+//Checking for a winner or draw using the for loop
+function gameWinner() {
+    //checking the rows for equality
+    for (let i = 0; i < 3; i++) {
+        if(gameData[i][0] > 0 && 
+           gameData[i][0] === gameData[i][1] &&
+           gameData[i][1] === gameData[i][2]
+           ) {
+               return gameData[i][0]
+           }
+    }
+
+     //checking the cols for equality
+     for (let i = 0; i < 3; i++) {
+        if(gameData[0][i] > 0 && 
+           gameData[0][i] === gameData[1][i] &&
+           gameData[0][i] === gameData[2][i]
+           ) {
+               return gameData[0][i]
+           }
+    }
+
+     //checking equality diagonally (top left to bottom right)
+    if(
+        gameData[0][0] > 0 && 
+        gameData[0][0] === gameData[1][1] &&
+        gameData[1][1] === gameData[2][2]
+       ) {
+           return gameData[0][0]
+       }
+
+    //checking equality diagonally (bottom left to top right)   
+    if(
+     gameData[2][0] > 0 && 
+     gameData[2][0] === gameData[1][1] &&
+     gameData[1][1] === gameData[0][2]
+    ) {
+        return gameData[2][0]
+    }
+
+    if(currentRound === 9) {
+        return -1
+    }
+    return 0
+}
+
+function endGame(winnerID) {
+    gameIsOver = true
+    winBox.style.display = ("block")
+
+    if(winnerID > 0){
+        const winnerName = document.getElementById("winner-name")
+        const winnerIndex = players[winnerID - 1].name
+        winnerName.textContent = winnerIndex
+    }else{
+        winBox.firstElementChild.textContent = "It's A Draw! lol"
+    }
+    
+}
+
+//Reseting game
+function resetGame() {
+    activePlayer = 0
+    currentRound = 1
+    gameIsOver = false
+    winBox.firstElementChild.innerHTML = 
+    'You won, <span class="winner-name" id="winner-name">Player Name</span>!'
+    winBox.style.display = "none"
+
+    //reseting game board using for loop
+    let gameBoardIndex = 0
+    for (let i = 0; i < 3; i++){
+        for (let j = 0; j < 3; j++){
+            gameData[i][j] = 0
+            const gameBoardElement = gameBoard.children[gameBoardIndex]
+            gameBoardElement.textContent = ''
+            gameBoardElement.classList.remove("played")
+            gameBoardIndex++
+        }
+    }
 }
