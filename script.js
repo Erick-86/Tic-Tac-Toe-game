@@ -17,6 +17,7 @@ const gameData = [
 
 let editedPlayer = 0
 let activePlayer = 0
+let currentRound = 1
 //an array storing the players data
 const players = [
     {name: '',
@@ -166,5 +167,57 @@ function selectedBox(e) {
 
     //updating the game data using the 2 dimensional arrays
     gameData[selctedRow][selctedCol] = activePlayer + 1
+
+    //checking for game winner
+    const winnerID = gameWinner()
+    console.log(winnerID)
+
+    currentRound++
     switchPlayer()
+}
+
+//Checking for a winner or draw using the for loop
+function gameWinner() {
+    //checking the rows for equality
+    for (let i = 0; i < 3; i++) {
+        if(gameData[i][0] > 0 && 
+           gameData[i][0] === gameData[i][1] &&
+           gameData[i][1] === gameData[i][2]
+           ) {
+               return gameData[i][0]
+           }
+    }
+
+     //checking the cols for equality
+     for (let i = 0; i < 3; i++) {
+        if(gameData[0][i] > 0 && 
+           gameData[0][i] === gameData[1][i] &&
+           gameData[0][i] === gameData[2][i]
+           ) {
+               return gameData[0][i]
+           }
+    }
+
+     //checking equality diagonally (top left to bottom right)
+    if(
+        gameData[0][0] > 0 && 
+        gameData[0][0] === gameData[1][1] &&
+        gameData[1][1] === gameData[2][2]
+       ) {
+           return gameData[0][0]
+       }
+
+    //checking equality diagonally (bottom left to top right)   
+    if(
+     gameData[2][0] > 0 && 
+     gameData[2][0] === gameData[1][1] &&
+     gameData[1][1] === gameData[0][2]
+    ) {
+        return gameData[2][0]
+    }
+
+    if(currentRound === 9) {
+        return -1
+    }
+    return 0
 }
